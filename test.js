@@ -18,7 +18,7 @@ var options = {
         used: '>20%'
     },
     cpualert: {
-        load: '>20%'
+        //load: '>0%'
     },
     diskalert: {
         //filesystem: 'C:',
