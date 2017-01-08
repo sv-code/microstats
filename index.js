@@ -36,9 +36,25 @@ statEmitter.start = function(options, callback) {
             return;
         }
         
-        stats.memory(statEmitter, memusedt);
-        stats.cpu(statEmitter, cpuloadt);
-        stats.disk(statEmitter, diskfilesystems, mounts, diskusedt);
+        try {
+            stats.memory(statEmitter, memusedt);
+        }
+        catch(err) {
+            console.log('mem-error:',err);    
+        }
+        
+        try {
+            stats.cpu(statEmitter, cpuloadt);
+        }
+        catch(err) {
+            console.log('cpu-error:',err);
+        }
+        try {
+            stats.disk(statEmitter, diskfilesystems, mounts, diskusedt);
+        }
+        catch(err) {
+            console.log('disk-error:',err);
+        }
     }, frequency);
     
     return callback(null);
