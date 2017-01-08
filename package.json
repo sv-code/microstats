@@ -1,0 +1,26 @@
+{
+  "name": "microstats",
+  "version": "0.1.0",
+  "description": "A node module that monitors Memory, CPU and Disk utilization and alerts the caller through events, either periodically or when a user defined threshold is breached. Currently available for linux, macOS and windows. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sv-code/microstats.git"
+  },
+  "keywords": [
+    "CPU",
+    "memory",
+    "disk",
+    "usage",
+    "alerts"
+  ],
+  "author": "Srivathsan Venkat <sriv@me.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sv-code/microstats/issues"
+  },
+  "homepage": "https://github.com/sv-code/microstats#readme"
+}
