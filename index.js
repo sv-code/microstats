@@ -22,7 +22,7 @@ statEmitter.start = function(options, callback) {
             frequency = optionsparser.getFrequency();
         }
         else {
-            frequency = optionsparser.getFrequency(options);        
+            frequency = optionsparser.getFrequency(options);      
         }
     }
     catch(err) {
@@ -36,25 +36,10 @@ statEmitter.start = function(options, callback) {
             return;
         }
         
-        try {
-            stats.memory(statEmitter, memusedt);
-        }
-        catch(err) {
-            console.log('mem-error:',err);    
-        }
+        stats.memory(statEmitter, memusedt);
+        stats.cpu(statEmitter, cpuloadt);
+        stats.disk(statEmitter, diskfilesystems, mounts, diskusedt);
         
-        try {
-            stats.cpu(statEmitter, cpuloadt);
-        }
-        catch(err) {
-            console.log('cpu-error:',err);
-        }
-        try {
-            stats.disk(statEmitter, diskfilesystems, mounts, diskusedt);
-        }
-        catch(err) {
-            console.log('disk-error:',err);
-        }
     }, frequency);
     
     return callback(null);
