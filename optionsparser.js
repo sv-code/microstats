@@ -2,20 +2,38 @@ const util = require('util');
 
 // frequency: '2s'
 module.exports.getFrequency = function(options) {
-    if(!options || !options.frequency) return 2000; // default 2s
-    let f = options.frequency;
-    if(f.length !== 2 || isNaN(f[0])) {
-        throw "Invalid frequency. Try something like '30s', 2m' or '1h'";   
+    let f = {}; 
+    
+    if(!options || !options.frequency) {
+        f.mode = 'once';
+        f.interval = 2000; // default 2s
+        return f;
     }
     
-    let n = parseInt(f[0]);
-    let s = f[1];
+    f.mode = options.frequency;
+    if(options.frequency === 'once') {
+        f.interval = 0;
+        return f;
+    }
+    else if(options.frequency === 'onalert') {
+        f.interval = 2000; // check for alert condition every 2 seconds
+        return f;
+    }
+    else if(options.frequency.length !== 2 || isNaN(options.frequency[0])) {
+        throw "Invalid frequency. Try something like 'once', 'onalert', '2m' or '1h'";   
+    }
+    
+    f.mode = 'time';
+    let n = parseInt(options.frequency[0]);
+    let s = options.frequency[1];
         
     switch(s) {
-        case 's': return n * 1000;
-        case 'm': return n * 1000 * 60;
-        case 'h': return n * 1000 * 60 * 60;
+        case 's': f.interval = n * 1000;
+        case 'm': f.interval = n * 1000 * 60;
+        case 'h': f.interval = n * 1000 * 60 * 60;
     }
+    
+    return f;
 }
 
 // memory: used: '>80%'

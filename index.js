@@ -12,18 +12,17 @@ statEmitter.start = function(options, callback) {
     
     let frequency, memusedt, cpuloadt, diskfilesystems, mounts, diskusedt;
     try {
-        memusedt = optionsparser.getMemoryUsedAlertThreshold(options.memoryalert);
-        cpuloadt = optionsparser.getCpuLoadAlertThreshold(options.cpualert);
-        diskfilesystems = optionsparser.getDiskFilesystems(options.diskalert);
-        mounts = optionsparser.getDiskMounts(options.diskalert);
-        diskusedt = optionsparser.getDiskUsedAlertThreshold(options.diskalert);
+        frequency = optionsparser.getFrequency(options); 
+        console.log('frequency', frequency);
         
-        if(memusedt > 0 || cpuloadt > 0 || diskusedt > 0) {
-            frequency = optionsparser.getFrequency();
+        if(frequency.mode !== 'time') {
+            memusedt = optionsparser.getMemoryUsedAlertThreshold(options.memoryalert);
+            cpuloadt = optionsparser.getCpuLoadAlertThreshold(options.cpualert);
+            diskusedt = optionsparser.getDiskUsedAlertThreshold(options.diskalert);
         }
-        else {
-            frequency = optionsparser.getFrequency(options);      
-        }
+        
+        diskfilesystems = optionsparser.getDiskFilesystems(options.diskalert);
+        mounts = optionsparser.getDiskMounts(options.diskalert);    
     }
     catch(err) {
         return callback(err);    
@@ -40,7 +39,11 @@ statEmitter.start = function(options, callback) {
         stats.cpu(statEmitter, cpuloadt);
         stats.disk(statEmitter, diskfilesystems, mounts, diskusedt);
         
-    }, frequency);
+        if(frequency.mode === 'once') {
+            clearInterval(check);
+        }
+        
+    }, frequency.interval);
     
     return callback(null);
 }

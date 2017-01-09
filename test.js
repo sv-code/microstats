@@ -13,7 +13,9 @@ microstats.on('disk', function(value) {
 });
 
 var options = {
-    frequency : '2s',
+    frequency: 'once',
+    //frequency: 'onalert',
+    //frequency : '2s',
     memoryalert: {
         used: '>1%'
     },
