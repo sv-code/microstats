@@ -15,17 +15,17 @@ microstats.on('disk', function(value) {
 var options = {
     frequency : '2s',
     memoryalert: {
-        used: '>20%'
+        used: '>1%'
     },
     cpualert: {
-        //load: '>0%'
+        load: '>1%'
     },
     diskalert: {
         //filesystem: 'C:',
         //filesystems: ['/dev/disk1', '/dev/disk0s4'],
         //mount: '/',
         //mounts: ['/'],
-        used: '>30%'
+        used: '>1%'
     }
 };
 
