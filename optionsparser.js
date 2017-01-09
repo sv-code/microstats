@@ -61,7 +61,7 @@ module.exports.getCpuLoadAlertThreshold = function(cpuoptions) {
 // disk: filesystem/filesystems: '/dev/disk01'
 // disk: filesystem/filesystems: ['/dev/disk01', '/dev/disk02']
 module.exports.getDiskFilesystems = function(diskoptions) {
-    filesystems = []
+    let filesystems = [];
     if(!diskoptions || (!diskoptions.filesystem && !diskoptions.filesystems)) return null;
     let u = diskoptions.filesystem || diskoptions.filesystems;
     if(util.isArray(u)) filesystems = u;
@@ -72,7 +72,7 @@ module.exports.getDiskFilesystems = function(diskoptions) {
 // disk: mount/mounts: '/'
 // disk: mount/mounts: ['/', '/home/sv']
 module.exports.getDiskMounts = function(diskoptions) {
-    mounts = []
+    let mounts = [];
     if(!diskoptions || (!diskoptions.mount && !diskoptions.mounts)) return null;
     let u = diskoptions.mount || diskoptions.mounts;
     if(util.isArray(u)) mounts = u;
