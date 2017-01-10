@@ -1,5 +1,5 @@
 var microstats = require('.');
-           
+
 microstats.on('memory', function(value) {
     console.log('MEMORY:', value);
 });
@@ -13,9 +13,9 @@ microstats.on('disk', function(value) {
 });
 
 var options = {
-    frequency: 'once',
+    //frequency: 'once',
     //frequency: 'onalert',
-    //frequency : '2s',
+    frequency : '2s',
     memoryalert: {
         used: '>1%'
     },
@@ -34,4 +34,7 @@ var options = {
 microstats.start(options, function(err) {
     if(err) console.log('ERROR:', err);
 });
-//microstats.stop();
+
+setTimeout(function(){
+    microstats.stop();
+}, 5000);

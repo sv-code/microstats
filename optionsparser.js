@@ -1,7 +1,7 @@
 const util = require('util');
 
 // frequency: '2s'
-module.exports.getFrequency = function(options) {
+exports.getFrequency = function(options) {
     let f = {}; 
     
     if(!options || !options.frequency) {
@@ -28,16 +28,17 @@ module.exports.getFrequency = function(options) {
     let s = options.frequency[1];
         
     switch(s) {
-        case 's': f.interval = n * 1000;
-        case 'm': f.interval = n * 1000 * 60;
-        case 'h': f.interval = n * 1000 * 60 * 60;
+        case 's': f.interval = n * 1000; break;
+        case 'm': f.interval = n * 1000 * 60; break;
+        case 'h': f.interval = n * 1000 * 60 * 60; break;
+        default:  f.interval = 2000; 
     }
     
     return f;
 }
 
 // memory: used: '>80%'
-module.exports.getMemoryUsedAlertThreshold = function(memoptions) {
+exports.getMemoryUsedAlertThreshold = function(memoptions) {
     if(!memoptions || !memoptions.used) return 0; // default 0%
     let u = memoptions.used;
     if(u.length < 3 || !u.includes('>') || !u.includes('%')) {
@@ -48,7 +49,7 @@ module.exports.getMemoryUsedAlertThreshold = function(memoptions) {
 }
 
 // cpu: load: '>80%'
-module.exports.getCpuLoadAlertThreshold = function(cpuoptions) {
+exports.getCpuLoadAlertThreshold = function(cpuoptions) {
     if(!cpuoptions || !cpuoptions.load) return 0; // default 0%
     let u = cpuoptions.load;
     if(u.length < 3 || !u.includes('>') || !u.includes('%')) {
@@ -60,7 +61,7 @@ module.exports.getCpuLoadAlertThreshold = function(cpuoptions) {
 
 // disk: filesystem/filesystems: '/dev/disk01'
 // disk: filesystem/filesystems: ['/dev/disk01', '/dev/disk02']
-module.exports.getDiskFilesystems = function(diskoptions) {
+exports.getDiskFilesystems = function(diskoptions) {
     let filesystems = [];
     if(!diskoptions || (!diskoptions.filesystem && !diskoptions.filesystems)) return null;
     let u = diskoptions.filesystem || diskoptions.filesystems;
@@ -71,7 +72,7 @@ module.exports.getDiskFilesystems = function(diskoptions) {
 
 // disk: mount/mounts: '/'
 // disk: mount/mounts: ['/', '/home/sv']
-module.exports.getDiskMounts = function(diskoptions) {
+exports.getDiskMounts = function(diskoptions) {
     let mounts = [];
     if(!diskoptions || (!diskoptions.mount && !diskoptions.mounts)) return null;
     let u = diskoptions.mount || diskoptions.mounts;
@@ -81,7 +82,7 @@ module.exports.getDiskMounts = function(diskoptions) {
 }
 
 // disk: used: '>80%'
-module.exports.getDiskUsedAlertThreshold = function(diskoptions) {
+exports.getDiskUsedAlertThreshold = function(diskoptions) {
     if(!diskoptions || !diskoptions.used) return 0; // default 0%
     let u = diskoptions.used;
     if(u.length < 3 || !u.includes('>') || !u.includes('%')) {

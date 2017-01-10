@@ -10,7 +10,7 @@ statEmitter.start = function(options, callback) {
         return callback('Platform currently unsupported');
     }
     
-    let frequency, memusedt, cpuloadt, diskfilesystems, mounts, diskusedt;
+    let frequency, memusedt = 0, cpuloadt = 0, diskusedt = 0, diskfilesystems, mounts;
     try {
         frequency = optionsparser.getFrequency(options); 
         console.log('frequency', frequency);
