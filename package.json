@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/sv-code/microstats/issues"
   },
-  "homepage": "https://github.com/sv-code/microstats#readme"
+  "homepage": "https://github.com/sv-code/microstats#readme",
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
 }

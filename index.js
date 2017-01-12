@@ -10,15 +10,14 @@ statEmitter.start = function(options, callback) {
         return callback('Platform currently unsupported');
     }
     
-    let frequency, memusedt = 0, cpuloadt = 0, diskusedt = 0, diskfilesystems, mounts;
+    let frequency, memusedThreshold = 0, cpuloadThreshold = 0, diskusedThreshold = 0, diskfilesystems, mounts;
     try {
         frequency = optionsparser.getFrequency(options); 
-        console.log('frequency', frequency);
         
-        if(frequency.mode !== 'time') {
-            memusedt = optionsparser.getMemoryUsedAlertThreshold(options.memoryalert);
-            cpuloadt = optionsparser.getCpuLoadAlertThreshold(options.cpualert);
-            diskusedt = optionsparser.getDiskUsedAlertThreshold(options.diskalert);
+        if(frequency.mode === 'onalert') {
+            memusedThreshold = optionsparser.getMemoryUsedAlertThreshold(options.memoryalert);
+            cpuloadThreshold = optionsparser.getCpuLoadAlertThreshold(options.cpualert);
+            diskusedThreshold = optionsparser.getDiskUsedAlertThreshold(options.diskalert);
         }
         
         diskfilesystems = optionsparser.getDiskFilesystems(options.diskalert);
@@ -35,9 +34,9 @@ statEmitter.start = function(options, callback) {
             return;
         }
         
-        stats.memory(statEmitter, memusedt);
-        stats.cpu(statEmitter, cpuloadt);
-        stats.disk(statEmitter, diskfilesystems, mounts, diskusedt);
+        stats.memory(statEmitter, { threshold: memusedThreshold });
+        stats.cpu(statEmitter, { threshold: cpuloadThreshold });
+        stats.disk(statEmitter, { threshold: diskusedThreshold, diskfilesystems: diskfilesystems, mounts: mounts });
         
         if(frequency.mode === 'once') {
             clearInterval(check);
