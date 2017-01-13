@@ -128,7 +128,7 @@ CPU: { loadpct: 39.28, userpct: 10.71, syspct: 28.57, idlepct: 60.71 }
 
 [MIT](http://vjpr.mit-license.org)
 
-[npm-image]: https://img.shields.io/npm/v/live-xxx.svg
-[npm-url]: https://npmjs.org/package/live-xxx
+[npm-image]: https://img.shields.io/npm/v/microstats.svg
+[npm-url]: https://npmjs.org/package/microstats
 [travis-image]: https://travis-ci.org/sv-code/microstats.svg?branch=master
 [travis-url]: https://travis-ci.org/sv-code/microstats
