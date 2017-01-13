@@ -27,7 +27,7 @@ statEmitter.start = function(options, cb) {
             mounts = optionsparser.getDiskMounts(options.diskalert);
         }
         
-        console.log(frequency, memusedThreshold, cpuloadThreshold, diskusedThreshold, diskfilesystems, mounts);
+        //console.log(frequency, memusedThreshold, cpuloadThreshold, diskusedThreshold, diskfilesystems, mounts);
     }
     catch(err) {
         if(cb && typeof(cb) === 'function') return cb(err); 
