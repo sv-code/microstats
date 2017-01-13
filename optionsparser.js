@@ -39,7 +39,7 @@ exports.getFrequency = function(options) {
 
 // memory: used: '>80%'
 exports.getMemoryUsedAlertThreshold = function(memoptions) {
-    if(!memoptions || !memoptions.used) return 0; // default 0%
+    if(!memoptions || !memoptions.used) return 50; // default 50%
     let u = memoptions.used;
     if(u.length < 3 || !u.includes('>') || !u.includes('%')) {
         throw "Invalid 'used' memory option. Try something like used: '>80%'"; 
@@ -50,7 +50,7 @@ exports.getMemoryUsedAlertThreshold = function(memoptions) {
 
 // cpu: load: '>80%'
 exports.getCpuLoadAlertThreshold = function(cpuoptions) {
-    if(!cpuoptions || !cpuoptions.load) return 0; // default 0%
+    if(!cpuoptions || !cpuoptions.load) return 10; // default 50%
     let u = cpuoptions.load;
     if(u.length < 3 || !u.includes('>') || !u.includes('%')) {
         throw "Invalid 'load' cpu option. Try something like used: '>80%'"; 
@@ -83,7 +83,7 @@ exports.getDiskMounts = function(diskoptions) {
 
 // disk: used: '>80%'
 exports.getDiskUsedAlertThreshold = function(diskoptions) {
-    if(!diskoptions || !diskoptions.used) return 0; // default 0%
+    if(!diskoptions || !diskoptions.used) return 50; // default 50%
     let u = diskoptions.used;
     if(u.length < 3 || !u.includes('>') || !u.includes('%')) {
         throw "Invalid 'used' disk option. Try something like used: '>80%'"; 

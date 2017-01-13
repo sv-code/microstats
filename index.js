@@ -5,26 +5,32 @@ const EventEmitter = require('events').EventEmitter
 
 var on = false;
 
-statEmitter.start = function(options, callback) {
+statEmitter.start = function(options, cb) {
     if(!isPlatformSupported()) {
-        return callback('Platform currently unsupported');
+        if(cb && typeof(cb) === 'function') return cb('Platform currently unsupported');
+        else return;
     }
     
     let frequency, memusedThreshold = 0, cpuloadThreshold = 0, diskusedThreshold = 0, diskfilesystems, mounts;
     try {
         frequency = optionsparser.getFrequency(options); 
         
-        if(frequency.mode === 'onalert') {
+        if(options && frequency.mode === 'onalert') {
             memusedThreshold = optionsparser.getMemoryUsedAlertThreshold(options.memoryalert);
             cpuloadThreshold = optionsparser.getCpuLoadAlertThreshold(options.cpualert);
             diskusedThreshold = optionsparser.getDiskUsedAlertThreshold(options.diskalert);
         }
         
-        diskfilesystems = optionsparser.getDiskFilesystems(options.diskalert);
-        mounts = optionsparser.getDiskMounts(options.diskalert);    
+        if(options) {
+            diskfilesystems = optionsparser.getDiskFilesystems(options.diskalert);
+            mounts = optionsparser.getDiskMounts(options.diskalert);
+        }
+        
+        console.log(frequency, memusedThreshold, cpuloadThreshold, diskusedThreshold, diskfilesystems, mounts);
     }
     catch(err) {
-        return callback(err);    
+        if(cb && typeof(cb) === 'function') return cb(err); 
+        else return;
     }
     
     on = true;
@@ -44,7 +50,8 @@ statEmitter.start = function(options, callback) {
         
     }, frequency.interval);
     
-    return callback(null);
+    if(cb && typeof(cb) === 'function') return cb(null);
+    else return;
 }
 
 statEmitter.stop = function() {

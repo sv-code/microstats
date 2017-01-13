@@ -12,29 +12,28 @@ microstats.on('disk', function(value) {
    console.log('DISK:', value) 
 });
 
-var options = {
-    //frequency: 'once',
+var options1 = { frequency: 'once' }
+var options2 = { frequency: '5s' }
+var options3 = { frequency: 'onalert' }
+var options4 = {
     frequency: 'onalert',
-    //frequency : '2s',
-    memoryalert: {
-        used: '>30%'
-    },
-    cpualert: {
-        load: '>30%'
-    },
-    diskalert: {
-        //filesystem: 'C:',
-        //filesystems: ['/dev/disk1', '/dev/disk0s4'],
-        //mount: '/',
-        //mounts: ['/'],
-        used: '>40%'
+    memoryalert: { used: '>15%' },
+    cpualert: { load: '>30%' },
+    diskalert: { //filesystem: 'C:', //filesystems: ['/dev/disk1', '/dev/disk0s4'],
+        mount: '/', //mounts: ['/'],
+        used: '>10%'
     }
 };
 
-microstats.start(options, function(err) {
-    if(err) console.log('ERROR:', err);
+var optionsArray = [ options1, options2, options3, options4 ];
+optionsArray.forEach(function(options) {
+    console.log('---Testing options:', options,'---')
+    microstats.start(options, function(err) {
+        if(err) console.log(err);
+    });
+    
+    setTimeout(function(){
+        microstats.stop();
+    }, 7000);
 });
 
-setTimeout(function(){
-    microstats.stop();
-}, 5000);

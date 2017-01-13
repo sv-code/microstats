@@ -3,7 +3,7 @@
 [![NPM Version][npm-image]][npm-url]
 [![Linux Build][travis-image]][travis-url]
 
-> microstats is a node utility that can be used to monitor OS events such as CPU utilization, memory and disk consumption. It can be used to 'alert' the user when user defined thresholds are breached. 
+> microstats is a node utility that can be used to monitor OS events such as CPU utilization, memory and disk consumption. It can be used to 'alert' the user when user defined thresholds are breached. Currently available for linux, macos and windows. 
 
 ## Install
 
@@ -64,6 +64,7 @@ options = {
   diskalert: { used: '>70%' }
 }
 ```
+If 'onalert' is used without specifying the thresholds, a default threshold value of 50% will be used for all stats.
 
 ## diskalert 
 
