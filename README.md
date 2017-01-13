@@ -23,6 +23,7 @@ microstats.on('disk', function(value) { console.log('DISK:', memory }
 
 let options = {}
 microstats.start(options, function(err) {
+  if(err) console.log(err);
 })
 
 ...
