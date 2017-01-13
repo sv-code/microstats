@@ -1,9 +1,9 @@
 # microstats
 
-> microstats is a node utility that can be used to monitor OS events such as CPU utilization, memory and disk consumption. It can be used to 'alert' the user when user defined thresholds are breached. 
-
 [![NPM Version][npm-image]][npm-url]
 [![Linux Build][travis-image]][travis-url]
+
+> microstats is a node utility that can be used to monitor OS events such as CPU utilization, memory and disk consumption. It can be used to 'alert' the user when user defined thresholds are breached. 
 
 ## Install
 
