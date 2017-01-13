@@ -21,7 +21,7 @@ var options4 = {
     memoryalert: { used: '>15%' },
     cpualert: { load: '>30%' },
     diskalert: { //filesystem: 'C:', //filesystems: ['/dev/disk1', '/dev/disk0s4'],
-        mount: '/', //mounts: ['/'],
+        //mount: '/', //mounts: ['/'],
         used: '>10%'
     }
 };
