@@ -1,3 +1,4 @@
+'use strict';
 const EventEmitter = require('events').EventEmitter
     , statEmitter = module.exports = new EventEmitter()
     , optionsparser = require('./optionsparser')

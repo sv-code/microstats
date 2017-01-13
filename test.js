@@ -1,3 +1,4 @@
+'use strict'
 var microstats = require('.');
 
 microstats.on('memory', function(value) {
