@@ -1,6 +1,6 @@
 {
   "name": "microstats",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A node module that monitors Memory, CPU and Disk utilization and alerts the caller through events, either periodically or when a user defined threshold is breached. Currently available for linux, macOS and windows. ",
   "main": "index.js",
   "scripts": {
