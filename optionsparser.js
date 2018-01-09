@@ -4,6 +4,8 @@ const util = require('util');
 // frequency: '2s'
 exports.getFrequency = function(options) {
     let f = {}; 
+    let g = null;
+    let regexp = /^(\d+)([smh])$/;
     
     if(!options || !options.frequency) {
         f.mode = 'once';
@@ -20,13 +22,14 @@ exports.getFrequency = function(options) {
         f.interval = 2000; // check for alert condition every 2 seconds
         return f;
     }
-    else if(options.frequency.length !== 2 || isNaN(options.frequency[0])) {
+    else if(regexp.test(options.frequency)) {
+        g = regexp.exec(options.frequency);
+    } else
         throw "Invalid frequency. Try something like 'once', 'onalert', '2m' or '1h'";   
-    }
     
     f.mode = 'time';
-    let n = parseInt(options.frequency[0]);
-    let s = options.frequency[1];
+    let n = parseInt(g[1]);
+    let s = g[2];
         
     switch(s) {
         case 's': f.interval = n * 1000; break;
